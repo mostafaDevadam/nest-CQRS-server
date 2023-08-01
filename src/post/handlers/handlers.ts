@@ -9,20 +9,17 @@ import { PostAggregateRoot } from './event.handler';
 export class CreatePostHandler implements ICommandHandler<CreatePostCommand> {
     constructor(private readonly postService: PostService,
         private readonly eventPublisher: EventPublisher,
-
     ) { }
-
     async execute(command: CreatePostCommand) {
         const { title, content } = command;
         const post = await this.postService.create({ title, content });
         // event
         // const e = this.eventPublisher.mergeObjectContext(new PostAggregateRoot(Number(post.id)))
-        //e.doAction(Number(post.id))
+        // e.doAction(Number(post.id))
         // e.commit()
         const e = this.eventPublisher.mergeClassContext(PostAggregateRoot)
         const ev = new e(Number(post.id))
         ev.doAction(Number(post.id))
-
         return post;
     }
 }

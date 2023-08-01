@@ -1,4 +1,4 @@
-import { AggregateRoot, EventsHandler, IEventHandler } from "@nestjs/cqrs";
+import { AggregateRoot, EventsHandler, IEventHandler, } from "@nestjs/cqrs";
 import { PostCreatedEvent } from "../events/post.event";
 
 
