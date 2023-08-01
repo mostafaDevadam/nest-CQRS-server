@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 export interface Post {
     id?: number;
@@ -6,19 +8,30 @@ export interface Post {
     content: string;
 }
 
+export class PostDTO {
+    readonly title: string;
+    readonly content: string;
+}
 
 @Injectable()
 export class PostService {
     private readonly posts: Post[] = [];
 
-    create(post: Post): Post {
-        post.id = this.posts.length + 1
-        this.posts.push(post);
-        return post;
+    constructor(
+
+
+    ) { }
+
+    async create(post: Post) {
+        let post_ = post
+        post_.id = this.posts.length + 1
+        this.posts.push(post_);
+        return post_;
     }
 
-    findById(id: number): Post {
-        console.log('s id:', id)
-        return this.posts.find(post => post.id === id);
+    async findById(_id: any) {
+        return this.posts.find(post => post.id === _id);
+        //const new_post = await this.postModel.findById(_id)
+        //return 'new_post';
     }
 }
