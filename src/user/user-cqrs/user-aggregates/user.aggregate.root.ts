@@ -1,5 +1,6 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { UserCreatedEvent } from '../user-events/user.created.event';
+import { UserUpdatedEvent } from '../user-events/user.updated.event';
 
 
 export class UserAggregateRoot extends AggregateRoot {
@@ -10,19 +11,12 @@ export class UserAggregateRoot extends AggregateRoot {
     }
 
     applyCreated(_id$: any) {
-        if (_id$) {
+        if (_id$ === this._id)
             this.apply(new UserCreatedEvent(_id$))
-        } else if (this._id) {
-            this.apply(new UserCreatedEvent(this._id))
-        }
-
     }
 
     applyUpdated(_id: any) {
-        if (_id) {
-            this.apply(new UserCreatedEvent(_id))
-        } else if (this._id) {
-            this.apply(new UserCreatedEvent(this._id))
-        }
+        if (_id === this._id)
+            this.apply(new UserUpdatedEvent(_id))
     }
 }

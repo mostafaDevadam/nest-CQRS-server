@@ -1,5 +1,6 @@
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { UserCreatedEvent } from '../user-events/user.created.event';
+import { UserUpdatedEvent } from '../user-events/user.updated.event';
 
 
 
@@ -11,9 +12,9 @@ export class UserEventHandler implements IEventHandler<UserCreatedEvent> {
 
 }
 
-@EventsHandler(UserCreatedEvent)
-export class UserUpdateEventHandler implements IEventHandler<UserCreatedEvent> {
-    handle(event: UserCreatedEvent) {
+@EventsHandler(UserUpdatedEvent)
+export class UserUpdateEventHandler implements IEventHandler<UserUpdatedEvent> {
+    handle(event: UserUpdatedEvent) {
         console.log(`User with id ${event._id} has been updated!`);
     }
 
