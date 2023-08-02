@@ -78,4 +78,10 @@ export class PostService {
         //const new_post = await this.postModel.findById(_id)
         //return 'new_post';
     }
+
+    async findPostById(_id: any) {
+        const postById = await this.postModel.findById(_id)
+        console.log('postById: ', postById)
+        return postById;
+    }
 }

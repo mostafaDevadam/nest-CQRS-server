@@ -26,7 +26,7 @@ export class CreatePostHandler implements ICommandHandler<CreatePostCommand> {
         // e.commit()
         const e = this.eventPublisher.mergeClassContext(PostAggregateRoot)
         const ev = new e(one['_id'].toString())
-        ev.doAction(one['_id'].toString())
+        //ev.doAction(one['_id'].toString())
         return post;
     }
 }
@@ -44,7 +44,9 @@ export class GetPostHandler implements IQueryHandler<GetPostQuery> {
         console.log('h id:', _id)
         const post = await this.postService.findById(_id);
         console.log('h post:', post)
+        const onePostById = await this.postService.findPostById(_id)
+        console.log('h onePostById:', onePostById)
 
-        return post;
+        return onePostById;
     }
 }

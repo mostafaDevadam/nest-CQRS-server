@@ -6,10 +6,11 @@ export class PostAggregateRoot extends AggregateRoot {
     constructor(private _id: number | string) {
         super();
         this.autoCommit = true
+        this.apply(new PostCreatedEvent(this._id))
     }
 
     doAction(_id$: number | string) {
-        this.apply(new PostCreatedEvent(this._id))
+        this.apply(new PostCreatedEvent(_id$))
     }
 
 }

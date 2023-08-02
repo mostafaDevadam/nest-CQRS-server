@@ -19,7 +19,7 @@ export class PostController {
 
     @Get('/:_id')
     async getPost(@Param('_id') _id: string) {
-        const query = new GetPostQuery(Number(_id));
+        const query = new GetPostQuery(_id);
         console.log('q:', query)
         const post = await this.queryBus.execute(query);
         console.log('post:', post)
