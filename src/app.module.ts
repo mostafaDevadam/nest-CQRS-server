@@ -9,7 +9,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(`mongodb://localhost:27017/nestjs-typegoose`),
+    MongooseModule.forRoot(`${process.env.MONGO_URI}`),
     CqrsModule,
     PostModule,
     UserModule,

@@ -2,6 +2,6 @@
 import { IEvent } from '@nestjs/cqrs'
 
 export class PostCreatedEvent {
-   constructor(public readonly _id: number) { }
+   constructor(public readonly _id: number | string) { }
 
 }

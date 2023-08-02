@@ -3,12 +3,12 @@ import { PostCreatedEvent } from "../events/post.event";
 
 
 export class PostAggregateRoot extends AggregateRoot {
-    constructor(private _id: number) {
+    constructor(private _id: number | string) {
         super();
         this.autoCommit = true
     }
 
-    doAction(_id$: number) {
+    doAction(_id$: number | string) {
         this.apply(new PostCreatedEvent(this._id))
     }
 

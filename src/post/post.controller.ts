@@ -10,7 +10,7 @@ export class PostController {
     constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) { }
 
     @Post()
-    async createPost(@Body() body: { title: string; content: string }) {
+    async createPost(@Body() body: any) {
         const { title, content } = body;
         const command = new CreatePostCommand(title, content);
         const post = await this.commandBus.execute(command);
