@@ -11,7 +11,16 @@ export class UserEventHandler implements IEventHandler<UserCreatedEvent> {
 
 }
 
+@EventsHandler(UserCreatedEvent)
+export class UserUpdateEventHandler implements IEventHandler<UserCreatedEvent> {
+    handle(event: UserCreatedEvent) {
+        console.log(`User with id ${event._id} has been updated!`);
+    }
+
+}
 
 
 
-export const UserEventHandlers = [UserEventHandler]
+
+
+export const UserEventHandlers = [UserEventHandler, UserUpdateEventHandler]

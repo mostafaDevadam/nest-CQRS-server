@@ -4,6 +4,9 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { UserDTO } from './user.dto';
 import { IUser } from './user.interface';
+import { PartialType } from '@nestjs/mapped-types'
+
+
 
 @Injectable()
 export class UserService {
@@ -36,5 +39,14 @@ export class UserService {
         return await this.mModel.findById(_id).exec()
     }
 
+    async update(_id: any, data: UpdateUserDTO): Promise<User> {
+        console.log('user: ', _id, data)
+        const user = await (await this.mModel.findByIdAndUpdate(_id, { name: data.name }).setOptions({ new: true }))
+            .save()
+        return user
+    }
+
 
 }
+
+export class UpdateUserDTO extends PartialType(UserDTO) { }
