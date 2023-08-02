@@ -1,5 +1,3 @@
-
-
 import { Prop, Schema, SchemaFactory, } from "@nestjs/mongoose";
 import mongoose from 'mongoose'
 
@@ -21,7 +19,7 @@ export const MSchema = new mongoose.Schema({
     name: { type: String }
 })
 
-// export const MModel = mongoose.model('User', MSchema)
+export const MModel = mongoose.model('MUser', MSchema)
 
 
 
