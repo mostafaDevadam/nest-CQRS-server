@@ -1,11 +1,12 @@
 import { CommandHandler, ICommandHandler, QueryHandler, IQueryHandler, EventBus, EventPublisher } from '@nestjs/cqrs';
-import { IPost, PostDTO, PostService } from '../post.service';
+import { PostService } from '../post.service';
 import { GetPostQuery } from '../query/getPostQuery.query';
 import { CreatePostCommand } from '../command/createPostCommand.command';
 import { PostCreatedEvent } from '../events/post.event';
 import { PostAggregateRoot } from './event.handler';
 import { Post, PostDocument } from '../post.model';
 import { Model } from 'mongoose';
+import { PostDTO } from '../post.dto';
 
 @CommandHandler(CreatePostCommand)
 export class CreatePostHandler implements ICommandHandler<CreatePostCommand> {
@@ -14,12 +15,11 @@ export class CreatePostHandler implements ICommandHandler<CreatePostCommand> {
     ) { }
     async execute(command: CreatePostCommand) {
         const { title, content } = command;
-        const post = await this.postService.create({ title, content });
+        // const post = await this.postService.create({ title, content });
         const data: PostDTO = { title: title, content: content }
 
         const one = await this.postService.createOne(data)
         console.log('one:', one)
-
         // event
         // const e = this.eventPublisher.mergeObjectContext(new PostAggregateRoot(Number(post.id)))
         // e.doAction(Number(post.id))
@@ -27,7 +27,7 @@ export class CreatePostHandler implements ICommandHandler<CreatePostCommand> {
         const e = this.eventPublisher.mergeClassContext(PostAggregateRoot)
         const ev = new e(one['_id'].toString())
         //ev.doAction(one['_id'].toString())
-        return post;
+        return one;
     }
 }
 

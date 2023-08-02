@@ -2,28 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Post, PostDocument } from './post.model';
+import { IPost } from './post.interface';
+import { PostDTO, PostDTO$ } from './post.dto';
 
-export interface IPost {
-    id?: number;
-    _id?: any;
-    title: string;
-    content: string;
-}
 
-export interface IPost$ {
-    _id?: any;
-    title: string;
-    content: string;
-}
 
-export class PostDTO {
-    title: string;
-    content: string;
-}
 
-export class PostDTO$ {
-    title: string;
-}
 
 @Injectable()
 export class PostService {
