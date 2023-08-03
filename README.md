@@ -26,6 +26,8 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+Backend is developed using [Nest.js], [CQRS] for [Domain Driven Design] with [mongoDB] as NoSQL.
+
 ## Installation
 
 ```bash
